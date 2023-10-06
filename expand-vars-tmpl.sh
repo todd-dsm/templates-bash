@@ -1,3 +1,8 @@
+###
+###  For this to work, ALL variables must be EXPORT'ed to be expanded 
+###  from within the template file; E.G.: myNS. Else envsubst won't 
+###  be able to see and make use of them.
+###
 #!/usr/bin/env bash                                                                
 set -x                                                                             
 ###---------------------------------------------------------------------------- 

@@ -2,8 +2,9 @@
 #  PURPOSE: printer.func - screen printing library; supports:
 #            * goals: 1st-tier in the hierarchy: install thing
 #            * req:    2nd-tier: requirements that build towards satisfying goals
-#            * error:   3rd-tier: prints error messages on non-0 statuses
 #            * pass:    3rd-tier: prints success message if exit 0
+#            * info:    3rd-tier: prints informational message (neutral outcome)
+#            * error:   3rd-tier: prints error messages on non-0 statuses
 # -----------------------------------------------------------------------------
 #  EXECUTE: source scripts/lib/printer.func
 # -----------------------------------------------------------------------------
@@ -53,11 +54,19 @@ print_req() {
 
 # Pass utility (4-space indent, green, for successful tests)
 print_pass() {
+    local theMessage="${*:-test passed}"  # Use provided message or default
     local green='\033[0;32m'
     local reset='\033[0m'
-    printf '    %btest passed%b\n' "$green" "$reset"
+    printf '    %b%s%b\n' "$green" "$theMessage" "$reset"
 }
 
+# Info utility (4-space indent, cyan, for informational messages)
+print_info() {
+    local theMessage="$*"
+    local cyan='\033[0;36m'
+    local reset='\033[0m'
+    printf '    %b%s%b\n' "$cyan" "$theMessage" "$reset"
+}
 
 # Error announcement utility (tildes for error visibility)
 print_error() {

@@ -1,103 +1,101 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2317
 #  PURPOSE: Description
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 #  PREREQS: a)
 #           b)
 #           c)
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 #  EXECUTE:
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 #set -x
 
 
-###----------------------------------------------------------------------------
-### VARIABLES
-###----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# VARIABLES
+# ----------------------------------------------------------------------------
 # ENV Stuff
 #: "${1?  Wheres my first agument, bro!}"
-thing=false
+thing1=false
+thing2=true
 
 # Data
 
 
-###----------------------------------------------------------------------------
-### FUNCTIONS
-###----------------------------------------------------------------------------
-### Use this while developing
-function pMsg() {
-    theMessage="$1"
-    printf '%s\n' "$theMessage"
-}
+# ----------------------------------------------------------------------------
+# FUNCTIONS
+# ----------------------------------------------------------------------------
+# Loads print functs: print_goal, print_req, print_pass, print_info, print_error
+source scripts/lib/printer.func
 
-### Add these later
-### Loads print functions: print_goal, print_req, print_pass, print_error
-source lib/printer.func
+# ----------------------------------------------------------------------------
+# MAIN PROGRAM
+# ----------------------------------------------------------------------------
+# Goal A
+# ---
+print_goal 'Ensuring Goal A'
 
-###----------------------------------------------------------------------------
-### MAIN PROGRAM
-###----------------------------------------------------------------------------
-### REQ
-###---
-print_goal 'Lets do some STUFF!'
 
-###---
-### REQ
-###---
-print_req 'Do thing...'
-
-if [[ $thing == false ]]; then
-    print_error "thing failed!"
+# ---
+# REQ1
+# ---
+print_req "Perform operation 2 that supports $goal-{a}..."
+if [[ $thing1 == false ]]; then
+    print_error "operation 1 failed!"
 else
     print_pass
 fi
 
-###---
-### REQ
-###---
+
+# ---
+# REQ2
+# ---
+print_req "Perform operation 2 that supports $goal-{a}..."
+if [[ $thing2 == false ]]; then
+    print_error "operation 2 failed!"
+else
+    print_pass
+fi
 
 
-###---
-### REQ
-###---
+# ----------------------------------------------------------------------------
+# Goal B
+# ---
+print_goal 'Ensuring Goal B'
 
 
-###---
-### REQ
-###---
+# ---
+# REQ1
+# ---
+print_req "Perform operation 1 that supports $goal-{b}..."
+if [[ $thing1 == false ]]; then
+    print_error "operation 1 failed!"
+else
+    print_pass
+fi
 
 
-###---
-### REQ
-###---
+# ---
+# REQ2
+# ---
+print_req "Perform operation 2 that supports $goal-{b}..."
+if [[ $thing2 == false ]]; then
+    print_error "operation 2 failed!"
+else
+    print_pass
+fi
 
 
-###---
-### REQ
-###---
+# ----------------------------------------------------------------------------
+# Goal C, etc.
+# ---
+# REQ1
+# ---
+if ! command_to_execute; then
+  print_error "command failed."
+fi
 
 
-###---
-### REQ
-###---
-
-
-###---
-### REQ
-###---
-
-
-###---
-### REQ
-###---
-
-
-###---
-### REQ
-###---
-
-
-###---
-### fin~
-###---
+# ---
+# fin~
+# ---
 exit 0
